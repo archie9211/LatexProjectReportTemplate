@@ -1,0 +1,51 @@
+\documentclass{nithreport}
+
+\usepackage{graphicx}
+\usepackage{float}
+
+\usepackage[bookmarks, colorlinks=false, pdfborder={0 0 0}, pdftitle={Project Report}, pdfauthor={nageen,akash, sachi}, pdfsubject={Project report}, pdfkeywords={<keywords here>}]{hyperref}
+\title{Name of project}
+\author{Nageen Chand}
+\report{A major project}
+\nithdegree{Bachelor of Technology}
+\degreeshort{B.Tech.}
+\reportmonth{Dec}
+\reportyear{2019}
+\projectstartdate{August, 2019}
+\projectenddate{Dec, 2019}
+\mentor{Name of Mentor}
+\mentordesignation{Mentor DEsignation}
+\mentoraffiliation{Department of Computer Science and Engineering, National Institute of Technology Hamirpur}%change your department accordingly
+
+\authors{{Student1 Name (ROLLNO), Student2 Name (ROLLNO),Student3 Name (RollNo)}}
+\usepackage{titlesec}
+\titleformat{\chapter}[display]   
+{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge}   
+\titlespacing*{\chapter}{}{-50pt}{40pt}
+\begin{document}
+\coverpage
+\maketitle
+\certificate
+\pagenumbering{roman}
+
+
+\input{acknowledgement.tex}
+\input{abstract.tex}
+\tableofcontents
+\listoffigures
+
+\input{introduction.tex}
+
+\input{previousWorks.tex}
+\input{methodology.tex}
+
+\input{yolo.tex}
+\input{ofa.tex}
+\input{svm.tex}
+\input{conclusion.tex}
+
+\bibliographystyle{IEEEtran}
+\addcontentsline{toc}{chapter}{References}
+\bibliography{refs}
+
+\end{document}

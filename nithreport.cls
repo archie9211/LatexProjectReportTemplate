@@ -1,0 +1,358 @@
+% nithreport.cls
+% LaTeX Class file for the National Institute of Technology Hamirpur Report Format
+%   by Pranav Kant 2015/04/22
+%
+% Template based on withesis.cls from
+% http://www.ctan.org/tex-archive/macros/latex/contrib/withesis/
+%
+% Few snippets based on iitbthesis.cls
+% https://www.ee.iitb.ac.in/course/~shalini/ReportMtech/iitbthesis.cls
+%
+%=============================================================================
+% Licensed under the Perl Artistic License.
+% see: http://www.ctan.org/tex-archive/help/Catalogue/licenses.artistic.html
+% for more info...
+%=============================================================================
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesClass{nithreport}[2019/12/10 NIT Hamirpur Major Project Report Format]
+\typeout{Document Class `nithreport' v0.1 <10 Dec 19>}
+\usepackage{amsmath}
+\usepackage{etoolbox}
+\usepackage{geometry}
+
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
+
+% Defaults ...
+\ProcessOptions
+
+%=============================================================================
+% a4paper: report must be printed on a4 size paper.
+% 12pt:    font size must be 12 pt
+%
+% NITH Report format requires text size to be 12 pt
+% =============================================================================
+\PassOptionsToClass{12pt,a4paper}{report}
+\LoadClass{report}
+
+% Mentor name
+\newcommand{\mentor}[1]{\gdef\@mentorname{#1}}
+\gdef\@mentorname{Unknown}  % Default is Unknown
+\newcommand{\mentordesignation}[1]{\gdef\@mentordesignation{#1}}
+\gdef\@mentordesignation{Unknown}  % Default is Unknown
+\newcommand{\mentoraffiliation}[1]{\gdef\@mentoraffiliation{#1}}
+\gdef\@mentoraffiliation{Unknown}  % Default is Unknown
+\newcommand{\reportmonth}[1]{\gdef\@reportmonth{#1}}
+\gdef\@reportmonth{Unknown}  % Default is Unknown
+\newcommand{\reportyear}[1]{\gdef\@reportyear{#1}}
+\gdef\@reportyear{Unknown}  % Default is Unknown
+\newcommand{\report}[1]{\gdef\@report{#1}}
+\gdef\@report{A major project}  % Default is Unknown
+\renewcommand{\bibname}{References}
+%=============================================================================
+% TITLE PAGE
+%
+%=============================================================================
+\newcommand\@nithmedskip{0.25in}
+\newcommand\@nithbigskip{0.6in}
+
+\newcommand{\nithdegree}[1]{\gdef\@nithdegree{#1}}
+\newcommand{\department}[1]{\gdef\@department{#1}}
+\newcommand{\degreeshort}[1]{\gdef\@degreeshort{#1}}
+\newcommand{\projectstartdate}[1]{\gdef\@startdate{#1}}
+\newcommand{\projectenddate}[1]{\gdef\@enddate{#1}}
+\newcommand{\authors}[1]{\gdef\@authors{#1}}
+
+\gdef\@nithdegree{Unknown}    % Default is Bachelor of Technology
+\gdef\@department{Computer Science and Engineering} % Default is Computer Science & Engineering Department
+\gdef\@degreeshort{Unknown}
+\gdef\@startdate{XXXX}
+\gdef\@enddate{YYYY}
+\gdef\@authors{{XXX,YYY,ZZZ}}
+
+
+%=============================================================================
+% COVER PAGE
+%=============================================================================
+\def\coverpage{
+\thispagestyle{empty}
+\begin{center}
+      {\bf\expandafter\uppercase\expandafter{\LARGE\@title}} \\[1.5in]
+      {\LARGE\bf \@degreeshort\ Project} \\[1.5in]
+      {\large \it by} \\
+      {\noindent\expandafter\forcsvlist\expandafter\printauthors\@authors} ~\\[\@nithbigskip]
+      \vfill
+      \includegraphics[width = 30 mm, height = 30 mm]{nithlogo.jpg} \\[\@nithmedskip]
+      {\large Department of \@department} \\
+      {\large National Institute of Technology}\\
+      {\large Hamirpur -- 177 005 (India)}\\
+      {\large \@reportmonth, \@reportyear}
+    \end{center}
+}
+
+%=============================================================================
+% TITLE PAGE
+%=============================================================================
+\newcommand\printauthors[1]{#1\\}
+\renewcommand{\maketitle}{%
+\newpage
+\thispagestyle{empty}
+    \begin{center}
+      {\bf\expandafter\uppercase\expandafter{\LARGE\@title}} \\[\@nithbigskip]
+    %   {\large \@report}\\
+      {\large A Project Report submitted in partial fulfillment of the requirements for} \\
+      {\large  the award of the degree of}\\
+      \vspace{20mm}
+      {\Large \bf \@nithdegree} \\
+      \vspace{5mm}
+      {\large in}\\
+      \vspace{5mm}
+
+      {\Large \bf \@department} \\
+      \vspace{5mm}
+
+      {\large by} \\
+      {\Large \bf \noindent\expandafter\forcsvlist\expandafter\printauthors\@authors} \\
+      \vspace{5mm}
+
+      {\large Under the guidance of }  \\
+      {\Large \bf \@mentorname} \\
+      \vfill
+      \includegraphics[width = 30 mm, height = 30 mm]{nithlogo.jpg} \\[\@nithmedskip]
+      \bf{{\large Department of \@department} \\
+      {\large National Institute of Technology}\\
+      {\large Hamirpur -- 177 005 (India)}\\
+      {\large \@reportmonth, \@reportyear}}
+    \end{center}
+}
+
+%=============================================================================
+% CERTIFICATE
+%=============================================================================
+\newcommand\printauthorswithsigs[1]{\vspace{.15in} #1\\}
+\newenvironment{certificate}{
+
+% Please add the following required packages to your document preamble:
+% \usepackage{multirow}
+\newgeometry{top=50mm, bottom=10mm,left=53mm,right=-7mm}
+\noindent%
+\begin{minipage}[t]{.2\textwidth}
+\vspace{0pt}\includegraphics[width=3cm,height=3cm]{nithlogo.jpg}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{.8\textwidth}
+\vspace{10pt}
+\begin{center}
+    \bf{\large {Department of \@department} \\
+      {\large National Institute of Technology}\\
+      {\large Hamirpur -- 177005 (India)}}
+\end{center}
+\end{minipage}
+\\
+\vskip
+\noindent\rule{\textwidth}{2pt}
+\begin{center}
+    {\large \bf {CANDIDATE'S DECLARATION} }
+\end{center}
+\\ [\@nithmedskip]
+
+
+  {We, hereby, certify that the work which is being presented in the
+  \@degreeshort\ major project report entitled {\bf \@title}, in partial fulfillment
+  of the requirements for the award of the {\bf \@nithdegree} in  {\bf \@department} and submitted
+  to the {\bf Department of \@department} of National Institute of Technology Hamirpur is
+  an authentic record of my own work carried out during a period from \@startdate\ to \@enddate\
+  under the supervision of {\bf \@mentorname}, \@mentordesignation, \@mentoraffiliation}.
+
+  {The matter presented in this report has not been submitted by me for the award of any other
+  degree elsewhere.}
+  \begin{flushright}
+    \bf{\expandafter\forcsvlist\expandafter\printauthorswithsigs\@authors}
+  \end{flushright}
+  {This is to certify that the above statement made by the candidates is correct to the best of my
+  knowledge.}
+
+{\bf{\hspace*{\fill}   (\@mentorname})}\\
+\noindent {\bf{Place: Hamirpur \hspace*{\fill}   (\@mentordesignation})}\\
+\noindent {\bf{Date: \hspace*{\fill}   NIT Hamirpur}}\\
+
+\vfill
+  % TODO: Write <name of student> or "students" after checking the number of students.
+\noindent{The project Viva-Voce Examination of above students has been held on .....................}\\[.25in]
+{\bf Signature of Supervisor \hspace*{\fill} Signature of DBPC Convener}
+\restoregeometry
+}
+
+%=============================================================================
+% COPYRIGHT PAGE
+%=============================================================================
+\def\copyrightpage{
+\newpage
+\thispagestyle{empty}
+\begin{center}
+    \vspace*{\fill}
+    {\large\bf Copyright \copyright\ NIT HAMIRPUR (HP), INDIA, \@reportyear}
+    \vspace*{\fill}
+    \clearpage
+\end{center}
+}
+
+%=============================================================================
+% ABSTRACT
+%=============================================================================
+% The abstract should begin with two single-spaced lines describing
+% the author and title in a standard format.  After these lines comes
+% the standard abstract.
+%=============================================================================
+\def\abstract{
+       \chapter*{\centering ABSTRACT}
+   \rule{\textwidth}{2pt}
+%   \addcontentsline{toc}{chapter}{Abstract}
+  \relax\markboth{ABSTRACT}{ABSTRACT}}
+\def\endabstract{\par\newpage}
+
+
+%=============================================================================
+% LIST OF SYMBOLS
+%=============================================================================
+% The list of symbols environment must do the following:
+% - produce the table of contents entry for the list of symbols section
+% - start a new page with LIST OF SYMBOLS centered two inches from the top
+%=============================================================================
+\def\listofsymbols{
+  \chapter*{List of Symbols}
+  \addcontentsline{toc}{chapter}{List of Symbols}}
+\def\endlistofsymbols{\par\newpage}
+
+
+%=============================================================================
+% ACKNOWLEDGMENTS
+%=============================================================================
+% The acknowledgments environment must do the following:
+% - start a new page with ACKNOWLEDGMENTS centered two inches from the top
+%=============================================================================
+\def\acknowledgments{
+  \chapter*{\centering ACKNOWLEDGMENTS}
+  \rule{\textwidth}{2pt}
+  \doublespace}
+
+
+\def\endacknowledgments{
+\vskip 5cm
+\begin{flushright}
+  \bf \expandafter\forcsvlist\expandafter\printauthors\@authors
+\end{flushright}
+
+\par\newpage}
+%=============================================================================
+% \@makecaption{NUMBER}{TEXT} : Macro to make a figure or table caption.
+%      NUMBER : Figure or table number--e.g., 'Figure 3.2'
+%      TEXT   : The caption text.
+%  Macro should be called inside a \parbox of right width, with \normalsize.
+%=============================================================================
+\long\def\@makecaption#1#2{%
+  \vskip\abovecaptionskip
+  \sbox\@tempboxa{#1: #2}%
+  \ifdim \wd\@tempboxa >\hsize
+    \singlespace#1: #2\par
+  \else
+    \global \@minipagefalse
+    \hb@xt@\hsize{\hfil\box\@tempboxa\hfil}%
+  \fi
+  \vskip\belowcaptionskip}
+
+%=============================================================================
+% GLOSSARY
+%=============================================================================
+% The glossary environment must do the following:
+% - produce the table of contents entry for the glossary
+% - start a new page with GLOSSARY centered two inches from the top
+%=============================================================================
+\def\glossary{
+  \chapter*{Glossary}
+  \addcontentsline{toc}{chapter}{Glossary}}
+\def\endglossary{\par\newpage}
+
+%=============================================================================
+% NOMENCLATURE
+%=============================================================================
+% The nomenclature environment must do the following:
+% - produce the table of contents entry for the nomenclature section
+% - start a new page with NOMENCLATURE centered two inches from the top
+%=============================================================================
+\def\nomenclature{
+  \chapter*{Nomenclature}
+  \addcontentsline{toc}{chapter}{Nomenclature}}
+\def\endnomenclature{\par\newpage}
+
+%=============================================================================
+% LIST OF FIGURES; LIST OF TABLES
+%  These macros from report.cls have been modified to add entry in the
+%  Contents table
+%=============================================================================
+\renewcommand\listoffigures{%
+    \if@twocolumn
+      \@restonecoltrue\onecolumn
+    \else
+      \@restonecolfalse
+    \fi
+    \chapter*{\listfigurename}%
+    \addcontentsline{toc}{chapter}{\listfigurename}%
+      \@mkboth{\MakeUppercase\listfigurename}%
+              {\MakeUppercase\listfigurename}%
+    \@starttoc{lof}%
+    \if@restonecol\twocolumn\fi
+    }
+\renewcommand\listoftables{%
+    \if@twocolumn
+      \@restonecoltrue\onecolumn
+    \else
+      \@restonecolfalse
+    \fi
+    \chapter*{\listtablename}%
+    \addcontentsline{toc}{chapter}{\listtablename}%
+      \@mkboth{%
+          \MakeUppercase\listtablename}%
+         {\MakeUppercase\listtablename}%
+    \@starttoc{lot}%
+    \if@restonecol\twocolumn\fi
+    }
+%=============================================================================
+% These commands can be used in the thesis to switch between single
+% and double spacing.  This is needed, for instance, in the abstract.
+%=============================================================================
+\newcommand{\oneskip}{1.0}
+\newcommand{\twoskip}{1.5}
+\newcommand{\singlespace}
+  {\renewcommand{\baselinestretch}{\oneskip}\Large\normalsize}
+\newcommand{\doublespace}
+  {\renewcommand{\baselinestretch}{\twoskip}\Large\normalsize}
+
+% ========================
+% Setting report format
+% ========================
+\setlength{\textheight}{245mm}
+\setlength{\textwidth}{160mm}
+
+\setlength{\headheight}{3mm}
+\setlength{\headsep}{14mm}
+\setlength{\topmargin}{15mm}
+% left side empty space on odd- & even-numbered pages
+\if@twoside
+  \typeout{Two side is true}
+  \setlength{\oddsidemargin}{30mm}  % for two side printing
+  \setlength{\evensidemargin}{20mm}
+\else
+  \typeout{Two side is false}
+  \setlength{\oddsidemargin}{30mm}  % for one side printing
+  \setlength{\evensidemargin}{30mm} % odd side margin = even side margin
+\fi
+\setlength{\hoffset}{-1in} % already accounted for in the margins
+\setlength{\voffset}{-1in} % already accounted for in the margins
+% line, paragraphs indent & spacing
+\setlength{\parindent}{5ex} % indentation 5 characters approx.
+
+\doublespace
+
+%=============================================================================
+% END FILE
+%=============================================================================
